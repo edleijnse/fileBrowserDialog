@@ -10,8 +10,7 @@ public class FileBrowserDialogMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        System.out.println(getClass().getClassLoader().getResource("fileBrowserDialog.fxml").getPath());
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fileBrowserDialog.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("resources/fileBrowserDialog.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
