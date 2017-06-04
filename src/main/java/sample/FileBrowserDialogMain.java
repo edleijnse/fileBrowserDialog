@@ -6,11 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class FileBrowserDialogMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        System.out.println(getClass().getClassLoader().getResource("fileBrowserDialog.fxml").getPath());
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fileBrowserDialog.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
