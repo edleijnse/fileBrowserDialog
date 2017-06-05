@@ -1,9 +1,12 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -17,6 +20,9 @@ public class FileBrowserDialogController implements Initializable{
     @FXML
     private Label label;
 
+    @FXML
+    private ListView directoriesList = new ListView();
+
     FileChooser fileChooser = new FileChooser();
     DirectoryChooser directoryChooser = new DirectoryChooser();
 
@@ -26,9 +32,18 @@ public class FileBrowserDialogController implements Initializable{
         label.setText("Directory Chooser");
         configuringFileChooser(fileChooser);
 
-        // directoryChooser.setInitialDirectory( fileChooser.showOpenDialog(new Stage()));
 
-        System.out.println("choosen directory: " + directoryChooser.showDialog(new Stage()));
+        ObservableList dataDirectories =
+                FXCollections.observableArrayList();
+
+        File choosedDirectory = directoryChooser.showDialog(new Stage());
+
+        String myChoosenDirectory = choosedDirectory.toPath().toString();
+        System.out.println("choosedDirectory: " + myChoosenDirectory);
+        dataDirectories.clear();
+        dataDirectories.addAll(myChoosenDirectory);
+        //System.out.println("choosen directory: " + directoryChooser.showDialog(new Stage()));
+        directoriesList.setItems(dataDirectories);
     }
 
     private void configuringFileChooser(FileChooser fileChooser) {

@@ -12,7 +12,7 @@ public class FileBrowserDialogMain extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("resources/fileBrowserDialog.fxml"));
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 500, 575));
         primaryStage.show();
     }
 
