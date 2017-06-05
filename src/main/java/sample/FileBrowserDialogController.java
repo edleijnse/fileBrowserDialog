@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -25,25 +26,33 @@ public class FileBrowserDialogController implements Initializable{
 
     FileChooser fileChooser = new FileChooser();
     DirectoryChooser directoryChooser = new DirectoryChooser();
+    ObservableList dataDirectories =
+            FXCollections.observableArrayList();
 
     @FXML
     private void handleButtonDirectoryChooserAction(ActionEvent event) {
         System.out.println("Directory Chooser activated");
         label.setText("Directory Chooser");
         configuringFileChooser(fileChooser);
+        configuringDirectoryChooser(directoryChooser);
 
 
-        ObservableList dataDirectories =
-                FXCollections.observableArrayList();
+
 
         File choosedDirectory = directoryChooser.showDialog(new Stage());
 
         String myChoosenDirectory = choosedDirectory.toPath().toString();
         System.out.println("choosedDirectory: " + myChoosenDirectory);
-        dataDirectories.clear();
+
         dataDirectories.addAll(myChoosenDirectory);
         //System.out.println("choosen directory: " + directoryChooser.showDialog(new Stage()));
         directoriesList.setItems(dataDirectories);
+    }
+
+    @FXML
+    private void handleDirectoriesListAction(MouseEvent event){
+        System.out.println("clicked on " + directoriesList.getSelectionModel().getSelectedItem());
+
     }
 
     private void configuringFileChooser(FileChooser fileChooser) {
@@ -64,6 +73,6 @@ public class FileBrowserDialogController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        dataDirectories.clear();dataDirectories.clear();
     }
 }
