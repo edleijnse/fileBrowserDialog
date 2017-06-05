@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -51,8 +54,17 @@ public class FileBrowserDialogController implements Initializable{
 
     @FXML
     private void handleDirectoriesListAction(MouseEvent event){
-        System.out.println("clicked on " + directoriesList.getSelectionModel().getSelectedItem());
-
+        String myDirectory = directoriesList.getSelectionModel().getSelectedItem().toString();
+        System.out.println("clicked on " + myDirectory);
+        fileChooser.setTitle("Select file to open");
+        fileChooser.setInitialDirectory(new File(myDirectory));
+        File choosedFile = fileChooser.showOpenDialog(new Stage());
+        System.out.println("choosedFile: " + choosedFile);
+        if (choosedFile != null){
+            // TODO https://stackoverflow.com/questions/33094981/javafx-8-open-a-link-in-a-browser-without-reference-to-application
+            // HostServices hs = new HostServices();
+            // hs.showDocument(choosedFile.toURI().toString());
+        }
     }
 
     private void configuringFileChooser(FileChooser fileChooser) {
