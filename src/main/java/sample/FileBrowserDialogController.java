@@ -64,6 +64,14 @@ public class FileBrowserDialogController implements Initializable{
             // TODO https://stackoverflow.com/questions/33094981/javafx-8-open-a-link-in-a-browser-without-reference-to-application
             // HostServices hs = new HostServices();
             // hs.showDocument(choosedFile.toURI().toString());
+            System.out.println("before showDocument: " + choosedFile.toString());
+            try {
+                this.getHostServices().showDocument(choosedFile.toURI().toURL().toExternalForm());
+            } catch (Exception e){
+                System.out.println("Exception: " + e);
+            }
+
+            System.out.println("after showDocument: " + choosedFile.toString());
         }
     }
 
@@ -81,6 +89,16 @@ public class FileBrowserDialogController implements Initializable{
 
         // Set Initial Directory
         directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+    }
+
+    private HostServices hostServices ;
+
+    public HostServices getHostServices() {
+        return hostServices ;
+    }
+
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices ;
     }
 
     @Override
