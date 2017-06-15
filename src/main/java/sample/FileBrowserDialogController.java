@@ -34,6 +34,16 @@ public class FileBrowserDialogController implements Initializable{
 
     Favorites favorites = new Favorites();
 
+    String myFavoriteDirectories = "/Users/Shared/favoriteDirectoriesFile";
+
+    public String getMyFavoriteDirectories() {
+        return myFavoriteDirectories;
+    }
+
+    public void setMyFavoriteDirectories(String myFavoriteDirectories) {
+        this.myFavoriteDirectories = myFavoriteDirectories;
+    }
+
     @FXML
     private void handleButtonDirectoryChooserAction(ActionEvent event) {
         System.out.println("Directory Chooser activated");
@@ -53,7 +63,7 @@ public class FileBrowserDialogController implements Initializable{
 
 
         favorites.addDirectory(myChoosenDirectory);
-        favorites.writeFavoriteDirectoriesToFile("favoriteDirectoriesFile");
+        favorites.writeFavoriteDirectoriesToFile(myFavoriteDirectories);
         //System.out.println("choosen directory: " + directoryChooser.showDialog(new Stage()));
 
         directoriesList.setItems(dataDirectories);
@@ -111,7 +121,8 @@ public class FileBrowserDialogController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dataDirectories.clear();
-        favorites.setDirectoriesFromFile("favoriteDirectoriesFile");
+        favorites.setDirectoriesFromFile(myFavoriteDirectories);
         dataDirectories.addAll(favorites.getDirectories());
+        directoriesList.setItems(dataDirectories);
     }
 }

@@ -11,6 +11,16 @@ public class FileBrowserDialogMain extends Application {
 
     private HostServices hostServices ;
 
+    String myFavouriteDirectory = "/Users/Shared/favoriteDirectoriesFile";
+
+    public String getMyFavouriteDirectory() {
+        return myFavouriteDirectory;
+    }
+
+    public void setMyFavouriteDirectory(String myFavouriteDirectory) {
+        this.myFavouriteDirectory = myFavouriteDirectory;
+    }
+
     public HostServices getMyHostServices() {
         return hostServices ;
     }
@@ -25,7 +35,9 @@ public class FileBrowserDialogMain extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("resources/fileBrowserDialog.fxml"));
         Parent root = loader.load();
         FileBrowserDialogController controller = loader.getController();
+        controller.setMyFavoriteDirectories(myFavouriteDirectory);
         controller.setHostServices(getHostServices());
+
         this.setHostServices(controller.getHostServices());
 
         primaryStage.setTitle("Filebrowser Dialog");
@@ -37,4 +49,8 @@ public class FileBrowserDialogMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    // To start from commandline
+    // mvn clean install
+    // java -cp fileBrowserDialog-1.0-SNAPSHOT.jar sample.FileBrowserDialogMain
 }
