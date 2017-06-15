@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -19,13 +21,19 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FileBrowserDialogController implements Initializable{
+public class FileBrowserDialogController implements Initializable {
 
     @FXML
     private Label label;
 
     @FXML
     private ListView directoriesList = new ListView();
+
+    @FXML
+    private CheckBox removeChecked = new CheckBox();
+
+    @FXML
+    private Button closeButton;
 
     FileChooser fileChooser = new FileChooser();
     DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -47,11 +55,9 @@ public class FileBrowserDialogController implements Initializable{
     @FXML
     private void handleButtonDirectoryChooserAction(ActionEvent event) {
         System.out.println("Directory Chooser activated");
-        label.setText("Directory Chooser");
+        // label.setText("Directory Chooser");
         configuringFileChooser(fileChooser);
         configuringDirectoryChooser(directoryChooser);
-
-
 
 
         File choosedDirectory = directoryChooser.showDialog(new Stage());
@@ -70,25 +76,43 @@ public class FileBrowserDialogController implements Initializable{
     }
 
     @FXML
-    private void handleDirectoriesListAction(MouseEvent event){
+    private void handleClose(){
+        System.out.println("Cancelled clicked");
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
+
+
+    @FXML
+    private void handleDirectoriesListAction(MouseEvent event) {
         String myDirectory = directoriesList.getSelectionModel().getSelectedItem().toString();
         System.out.println("clicked on " + myDirectory);
-        fileChooser.setTitle("Select file to open");
-        fileChooser.setInitialDirectory(new File(myDirectory));
-        File choosedFile = fileChooser.showOpenDialog(new Stage());
-        System.out.println("choosedFile: " + choosedFile);
-        if (choosedFile != null){
-            // TODO https://stackoverflow.com/questions/33094981/javafx-8-open-a-link-in-a-browser-without-reference-to-application
-            // HostServices hs = new HostServices();
-            // hs.showDocument(choosedFile.toURI().toString());
-            System.out.println("before showDocument: " + choosedFile.toString());
-            try {
-                this.getHostServices().showDocument(choosedFile.toURI().toURL().toExternalForm());
-            } catch (Exception e){
-                System.out.println("Exception: " + e);
-            }
+        if (removeChecked.isSelected() == true) {
+           System.out.println("Remove file from Directory");
+           favorites.removeDirectory(myDirectory);
+           favorites.writeFavoriteDirectoriesToFile(myFavoriteDirectories);
+           dataDirectories.remove(myDirectory);
+           directoriesList.setItems(dataDirectories);
+        } else {
+            fileChooser.setTitle("Select file to open");
+            fileChooser.setInitialDirectory(new File(myDirectory));
+            File choosedFile = fileChooser.showOpenDialog(new Stage());
+            System.out.println("choosedFile: " + choosedFile);
+            if (choosedFile != null) {
+                // TODO https://stackoverflow.com/questions/33094981/javafx-8-open-a-link-in-a-browser-without-reference-to-application
+                // HostServices hs = new HostServices();
+                // hs.showDocument(choosedFile.toURI().toString());
 
-            System.out.println("after showDocument: " + choosedFile.toString());
+                System.out.println("before showDocument: " + choosedFile.toString());
+                try {
+                    this.getHostServices().showDocument(choosedFile.toURI().toURL().toExternalForm());
+                } catch (Exception e) {
+                    System.out.println("Exception: " + e);
+                }
+
+                System.out.println("after showDocument: " + choosedFile.toString());
+
+            }
         }
     }
 
@@ -108,14 +132,14 @@ public class FileBrowserDialogController implements Initializable{
         directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
     }
 
-    private HostServices hostServices ;
+    private HostServices hostServices;
 
     public HostServices getHostServices() {
-        return hostServices ;
+        return hostServices;
     }
 
     public void setHostServices(HostServices hostServices) {
-        this.hostServices = hostServices ;
+        this.hostServices = hostServices;
     }
 
     @Override

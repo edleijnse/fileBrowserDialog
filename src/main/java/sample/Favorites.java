@@ -30,7 +30,7 @@ public class Favorites {
 
         Path path = Paths.get(fileName);
         try {
-            try (BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())){
+            try (BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
                 String line = null;
                 while ((line = reader.readLine()) != null) {
                     System.out.println(line);
@@ -46,11 +46,11 @@ public class Favorites {
 
     }
 
-    public void writeFavoriteDirectoriesToFile(String fileName){
+    public void writeFavoriteDirectoriesToFile(String fileName) {
         try {
             PrintWriter writer = new PrintWriter(fileName, "UTF-8");
-            for (String myDirectory: directories
-                 ) {
+            for (String myDirectory : directories
+                    ) {
                 System.out.println("myDirectory: " + myDirectory);
                 writer.println(myDirectory);
             }
@@ -62,9 +62,14 @@ public class Favorites {
         }
     }
 
-    public void addDirectory(String newDirectory){
+    public void addDirectory(String newDirectory) {
         directories.add(newDirectory);
     }
+
+    public void removeDirectory(String newDirectory) {
+        directories.remove(newDirectory);
+    }
+
 
     public static void main(String[] args) {
 
@@ -83,6 +88,8 @@ public class Favorites {
         favorites.writeFavoriteDirectoriesToFile("favoriteDirectoriesFile");
 
         favorites.setDirectoriesFromFile("favoriteDirectoriesFile");
+        System.out.println("favorites 2: " + xstream.toXML(favorites.getDirectories()));
+        favorites.removeDirectory("Downloads");
         System.out.println("favorites 2: " + xstream.toXML(favorites.getDirectories()));
 
     }

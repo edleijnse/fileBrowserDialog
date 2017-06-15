@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class FileBrowserDialogMain extends Application {
 
-    private HostServices hostServices ;
+    private HostServices hostServices;
 
     String myFavouriteDirectory = "/Users/Shared/favoriteDirectoriesFile";
 
@@ -22,15 +22,15 @@ public class FileBrowserDialogMain extends Application {
     }
 
     public HostServices getMyHostServices() {
-        return hostServices ;
+        return hostServices;
     }
 
     public void setHostServices(HostServices hostServices) {
-        this.hostServices = hostServices ;
+        this.hostServices = hostServices;
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         this.setHostServices(hostServices);
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("resources/fileBrowserDialog.fxml"));
         Parent root = loader.load();

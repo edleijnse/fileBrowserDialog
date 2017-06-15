@@ -2,38 +2,44 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="371.0" prefWidth="390.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FileBrowserDialogController">
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<GridPane alignment="center" hgap="10" prefHeight="371.0" prefWidth="555.0" vgap="10"
+          xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="sample.FileBrowserDialogController">
     <padding>
-        <Insets bottom="10" left="10" right="10" top="10" />
+        <Insets bottom="10" left="10" right="10" top="10"/>
     </padding>
     <children>
-        <HBox alignment="CENTER" prefHeight="300.0" prefWidth="372.0" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+        <HBox prefHeight="300.0" prefWidth="372.0" spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2"
+              GridPane.rowIndex="2">
             <children>
-                <Button fx:id="buttonDirectoryChooser" layoutX="126" layoutY="90" onAction="#handleButtonDirectoryChooserAction" prefHeight="25.0" prefWidth="148.0" text="choose Directory" />
-                <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" prefHeight="248.0" prefWidth="116.0" />
-                <Button text="Ok" />
-                <Button text="Cancel" />
+                <Button fx:id="buttonDirectoryChooser" layoutX="0" onAction="#handleButtonDirectoryChooserAction"
+                        prefHeight="27.0" prefWidth="121.0" text="new directory"/>
+                <Label text="remove directory"/>
+                <CheckBox fx:id="removeChecked"/>
+                <Button fx:id="closeButton" onAction= "#handleClose" text="close"/>
             </children>
         </HBox>
-      <ListView fx:id="directoriesList"  prefHeight="300.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" onMouseClicked="#handleDirectoriesListAction" />
+        <ListView fx:id="directoriesList" onMouseClicked="#handleDirectoriesListAction" prefHeight="294.0"
+                  prefWidth="496.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
     </children>
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
-      <RowConstraints maxHeight="27.0" minHeight="27.0" prefHeight="27.0" />
-      <RowConstraints />
-   </rowConstraints>
-  
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
+        <RowConstraints maxHeight="27.0" minHeight="27.0" prefHeight="27.0"/>
+        <RowConstraints/>
+    </rowConstraints>
+
 </GridPane>
