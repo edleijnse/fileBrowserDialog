@@ -32,6 +32,8 @@ public class FileBrowserDialogController implements Initializable{
     ObservableList dataDirectories =
             FXCollections.observableArrayList();
 
+    Favorites favorites = new Favorites();
+
     @FXML
     private void handleButtonDirectoryChooserAction(ActionEvent event) {
         System.out.println("Directory Chooser activated");
@@ -48,7 +50,12 @@ public class FileBrowserDialogController implements Initializable{
         System.out.println("choosedDirectory: " + myChoosenDirectory);
 
         dataDirectories.addAll(myChoosenDirectory);
+
+
+        favorites.addDirectory(myChoosenDirectory);
+        favorites.writeFavoriteDirectoriesToFile("favoriteDirectoriesFile");
         //System.out.println("choosen directory: " + directoryChooser.showDialog(new Stage()));
+
         directoriesList.setItems(dataDirectories);
     }
 
@@ -103,6 +110,8 @@ public class FileBrowserDialogController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        dataDirectories.clear();dataDirectories.clear();
+        dataDirectories.clear();
+        favorites.setDirectoriesFromFile("favoriteDirectoriesFile");
+        dataDirectories.addAll(favorites.getDirectories());
     }
 }
