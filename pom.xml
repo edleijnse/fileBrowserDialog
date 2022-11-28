@@ -96,6 +96,18 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>sample.FileBrowserDialogMain</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 
             <!-- Allows the example to be run via 'mvn compile exec:java' -->
             <plugin>
@@ -103,7 +115,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.1.1</version>
                 <configuration>
-                    <mainClass>leijnse.info.MainApp</mainClass>
+                    <mainClass>sample.FileBrowserDialogMain</mainClass>
                     <includePluginDependencies>false</includePluginDependencies>
                 </configuration>
             </plugin>

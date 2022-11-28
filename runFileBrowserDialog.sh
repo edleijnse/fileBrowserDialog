@@ -1,0 +1,1 @@
+java --module-path $PATH_TO_FX --add-modules javafx.controls,javafx.fxml -jar fileBrowserDialog-1.0-SNAPSHOT.jar

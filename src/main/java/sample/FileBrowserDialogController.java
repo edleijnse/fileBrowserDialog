@@ -42,7 +42,7 @@ public class FileBrowserDialogController implements Initializable {
 
     Favorites favorites = new Favorites();
 
-    String myFavoriteDirectories = "/Users/Shared/favoriteDirectoriesFile";
+    String myFavoriteDirectories = "/home/ed/favoriteDirectoriesFile";
 
     public String getMyFavoriteDirectories() {
         return myFavoriteDirectories;

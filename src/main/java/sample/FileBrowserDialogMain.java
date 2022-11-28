@@ -11,7 +11,7 @@ public class FileBrowserDialogMain extends Application {
 
     private HostServices hostServices;
 
-    String myFavouriteDirectory = "/Users/Shared/favoriteDirectoriesFile";
+    String myFavouriteDirectory = "/home/ed/favoriteDirectoriesFile";
 
     public String getMyFavouriteDirectory() {
         return myFavouriteDirectory;
